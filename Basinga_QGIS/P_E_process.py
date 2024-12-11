@@ -20,24 +20,27 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
-from PyQt4.QtGui import QAction, QIcon
+from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QAction
 from qgis.gui import QgsMessageBar
 # Initialize Qt resources from file resources.py
-import resources
+from . import resources
 # Import the code for the dialog
-from P_E_process_dialog import BasingaDialog, SQLDialog, HelpDialog
-from PR_processes import pr_processes
-from Denudation_process import denudation
+from .P_E_process_dialog import BasingaDialog, SQLDialog, HelpDialog
+from .PR_processes import pr_processes
+from .Denudation_process import denudation
 import os
 import os.path
 import stat
 import datetime
 import sys
 
+from qgis.core import Qgis
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QFileDialog
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
 
 class Basinga:
     """QGIS Plugin Implementation."""
@@ -53,7 +56,7 @@ class Basinga:
         # Save reference to the QGIS interface
         self.iface = iface
         # initialize plugin directory
-        self.plugin_dir = os.path.dirname(__file__)
+        self.plugin_dir = os.path.dirname(os.getcwd())
         # initialize locale
         locale = QSettings().value('locale/userLocale')[0:2]
         locale_path = os.path.join(
@@ -69,6 +72,7 @@ class Basinga:
                 QCoreApplication.installTranslator(self.translator)
 
         # Create the dialog (after translation) and keep reference
+        print("************************  ############### opening BasinDialog ***********************  ###############")
         self.dlg = BasingaDialog()
         self.dlgsql = SQLDialog()
         self.dlghelp = HelpDialog()
@@ -272,16 +276,17 @@ class Basinga:
 
     def run(self):
         """Run method that performs all the real work"""
-
+        from qgis.core import QgsProject
         # get the list of the opened layers and then their names
-        self.layers = self.iface.legendInterface().layers()
+        #self.layers = QgsProject.instance().mapLayers().values()
+        self.layers = list(QgsProject.instance().mapLayers().values())
         self.layer_list = []
         for layer in self.layers:
             self.layer_list.append(layer.name())
 
         # if there's no opened layer, output a warning message
         if len(self.layers) == 0:
-            self.iface.messageBar().pushMessage("Hello", "No loaded layer, please open at least the shapefile of your basin", level=QgsMessageBar.WARNING, duration=10)
+            self.iface.messageBar().pushMessage("Hello", "No loaded layer, please open at least the shapefile of your basin", level=Qgis.Warning, duration=10)
             return
 
         # clear the comboBoxes
@@ -313,6 +318,7 @@ class Basinga:
 
         # get the selected shp basin layer, get its fields and add them to the desired combobox list
         selectedLayerIndex_shp_basin = self.dlg.comboBox_shp_basin.currentIndex()
+        print(f"L'indice sélectionné est : {selectedLayerIndex_shp_basin}")
         selectedLayer_shp_basin = self.layers[selectedLayerIndex_shp_basin]
         self.dlg.comboBox_ConcField.clear()
         try : # use of try method to avoid error when a DEM is wrongly selected as a the basin shp
@@ -357,17 +363,18 @@ class Basinga:
 
     def select_output_DEM_basin_file(self):
         #open the save file dialog and save the results in the proper line box
-        filename = QFileDialog.getSaveFileName(self.dlg, "Select output file ", "", '*.tif')
+        filename, _ = QFileDialog.getSaveFileName(self.dlg, "Select output file ", "", '*.tif')
         self.dlg.lineEdit_output_DEM_basin.setText(filename)
 
     def select_output_qz_polygons(self):
         # open the save file dialog and save the results in the proper line box
-        filename = QFileDialog.getSaveFileName(self.dlg, "Select output file ", "", '*.shp')
+        filename, _ = QFileDialog.getSaveFileName(self.dlg, "Select output file ", "", '*.shp')
         self.dlg.lineEdit_output_qz_polygons.setText(filename)
+
 
     def select_output_glims_polygons(self):
         # open the save file dialog and save the results in the proper line box
-        filename = QFileDialog.getSaveFileName(self.dlg, "Select output file ", "", '*.shp')
+        filename, _ = QFileDialog.getSaveFileName(self.dlg, "Select output file ", "", '*.shp')
         self.dlg.lineEdit_output_glims_polygons.setText(filename)
 
     def sql_expression(self):
@@ -501,7 +508,8 @@ class Basinga:
         # get the name for the output dem, it will be used for the temp directory
         output_glims_polygons = self.dlg.lineEdit_output_glims_polygons.text()
         name = output_DEM_basin[:-4].encode('ascii','ignore')
-        name = name.split('/')  
+        name = name.decode('utf-8')  # MZ Decode bytes to string
+        name = name.split('/')
 
         # get the content of the comboboxes
         selectedLayerIndex_shp_basin = self.dlg.comboBox_shp_basin.currentIndex()
@@ -525,7 +533,8 @@ class Basinga:
         selectedLayerIndex_shp_glims = self.dlg.comboBox_shp_glims.currentIndex()
         selectedLayer_shp_glims = self.layers[selectedLayerIndex_shp_glims]
 
-        fields = selectedLayer_shp_basin.pendingFields()
+        # fields = selectedLayer_shp_basin.pendingFields()
+        fields = selectedLayer_shp_basin.fields() ##MZ
         selectedConcFieldIndex = self.dlg.comboBox_ConcField.currentIndex()
         selectedConcField = fields[selectedConcFieldIndex].name()
 
@@ -533,6 +542,8 @@ class Basinga:
         time = datetime.datetime.now()
         time = time.isoformat()
         time = time.encode('ascii','ignore')
+        if isinstance(time, bytes):  # Check if `time` is a bytes object
+            time = time.decode('utf-8')  # Decode bytes to string
         time = time.replace(':','')
         time = time.replace('-', '')
         time = time.replace('T', '_')
@@ -546,8 +557,13 @@ class Basinga:
         pr_processes(selectedLayer_shp_basin,selectedLayer_DEM_raster,output_DEM_basin,temp_dir,selectednuclide,self.use_geol_mask,selectedLayer_shp_geol,express_qz_extract,output_qz_polygons,self.use_ts_mask,selectedLayer_ts_raster,self.use_VDM,selectedConcField,self.use_glims_mask,selectedLayer_shp_glims,output_glims_polygons,self.lsORlsd)
 
         # Process successful
-        self.iface.messageBar().pushMessage("Process successful", "You will find the results in the specified files; a working directory was created, you will be able to use it or delete when closing QGIS", level=QgsMessageBar.INFO, duration=20)
-
+        # self.iface.messageBar().pushMessage("Process successful", "You will find the results in the specified files; a working directory was created, you will be able to use it or delete when closing QGIS", level=QgsMessageBar.INFO, duration=20)
+        self.iface.messageBar().pushMessage(
+            "Process successful",
+            "You will find the results in the specified files; a working directory was created, you will be able to use it or delete when closing QGIS",
+            level=Qgis.Info,
+            duration=20
+        )
         self.dlg.close() # close the dialog window
 
     def ok_D(self):
@@ -582,7 +598,7 @@ class Basinga:
         # The expression is then saved in the line box on the main window
         value_extract = self.dlgsql.lineEdit_value.text()
 
-        layers = self.iface.legendInterface().layers()
+        layers = QgsProject.instance().mapLayers().values()
         selectedLayerIndex_shp_geol = self.dlg.comboBox_shp_geol.currentIndex()
         selectedLayer_shp_geol = layers[selectedLayerIndex_shp_geol]
         fields = selectedLayer_shp_geol.pendingFields()

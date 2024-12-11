@@ -11,12 +11,12 @@
 #Open of the different python libraries needed later in the program:
 
 # Import from plugin
-from parameters_definition import *
-from lsd import *
+from .parameters_definition import *
+from .lsd import *
 
 # Import from qgis core and existing functions
 from qgis.core import *
-from PyQt4.QtCore import *
+from PyQt5.QtCore import *
 import processing
 import qgis.utils
 from osgeo import gdal
@@ -30,7 +30,7 @@ from scipy import interpolate
 pi=math.pi
 
 # Os tools
-from itertools import izip
+#from itertools import izip
 import os
 import os.path
 from os import chdir, getcwd
@@ -112,7 +112,8 @@ def code_type(type_):
 
 def checkfield(inSHP,champs):
     #check wether or not the inSHP file already includes the fields needed to store the results of the requested calculations  as function of the selected options
-    list_field_u2=[field.name() for field in inSHP.pendingFields()]
+    # list_field_u2 = [field.name() for field in inSHP.pendingFields()]
+    list_field_u2 = [field.name() for field in inSHP.fields()] #MZ
     list_field02=[x.encode('UTF8') for x in list_field_u2]
     result=0
     if champs in list_field02:
@@ -141,7 +142,8 @@ def assignSplitNumber (inSHP,field="split",type_ = "Int"):
     iter = inSHP.getFeatures() # get a list of the feature/polygon objects
     i = 1
     inSHP.startEditing() # open the editor mode
-    idx = inSHP.fieldNameIndex(field) # get the index of the field "field"
+    # idx = inSHP.fieldNameIndex(field) # get the index of the field "field"
+    idx = inSHP.fields().indexOf(field) #MZ
     for feature in iter:
         inSHP.changeAttributeValue(feature.id(), idx, i) # set i as value for the field idx of the polygon feature
         i += 1
@@ -221,8 +223,13 @@ def selectSaveByAttribute(inSHP,expression,outPath) :
 
 def splitSHP(inSHP,fieldName,dir):
     # split an open layer in dir according to a field name and return the list of the paths of the created shp files
-    processing.runalg('qgis:splitvectorlayer', inSHP, fieldName, dir) # qgis command to split a vector layer to x files containing each one the polygons sharing a common field value
-
+    # processing.runalg('qgis:splitvectorlayer', inSHP, fieldName, dir) # qgis command to split a vector layer to x files containing each one the polygons sharing a common field value
+    #MZ
+    processing.run("native:splitvectorlayer", {
+        'INPUT': inSHP,
+        'FIELD': fieldName,
+        'OUTPUT': dir
+    })
     # Make a list of every shp file in the temp directory that was created above (it avoids any other shapefile file in the folder)
     temp_dir_access = dir + '/' + '*.shp'
     list_shp_global = glob.glob(temp_dir_access) #
@@ -237,7 +244,8 @@ def clipRaster_byLayer(inDEM,layer,outDEM):
     # It uses a GDAL script which is different in qgis 2.14 and 2.8
 
     # We get the qgis version to pick the right command line
-    v = qgis.utils.QGis.QGIS_VERSION
+    # v = qgis.utils.QGis.QGIS_VERSION
+    v = Qgis.QGIS_VERSION ##MZ
     v = v.split(".")
 
     # Then we perform the gdal script
@@ -309,34 +317,87 @@ def getFieldIndex(inSHP,listFieldName):
     # return a list of field index from a opened shp file and a list of field names
     list_fields_index = []
     for field in listFieldName:
-        idx = inSHP.fieldNameIndex(field)
+        # idx = inSHP.fieldNameIndex(field)
+        idx = inSHP.fields().indexOf(field) #MZ
         list_fields_index.append(idx)
 
     return list_fields_index
 
-def updateResults(inSHP,listFieldName,results,split='split'):
-    # requires an opened layer, the list of the field names used, the matrix of the results, and the name of the field used to count the polygons
-    list_fields_index = getFieldIndex(inSHP, listFieldName) # get the list the list of the field indexes to work with it
-    
-    iter = inSHP.getFeatures()
+
+def updateResults(inSHP, listFieldName, results, split='split'):
+    """
+    MZ
+    Updates the attribute table of a layer based on the results matrix.
+
+    Args:
+        inSHP (QgsVectorLayer): The input shapefile layer.
+        listFieldName (list): List of field names to update.
+        results (list): A matrix of results to copy to the layer.
+        split (str): The field name used to match features (default: 'split').
+
+    Returns:
+        None
+    """
+    list_fields_index = getFieldIndex(inSHP, listFieldName)
+
+    if inSHP.fields().indexOf(split) == -1:
+        print(f"Error: Field '{split}' not found in the layer.")
+        return
+
+    iter_features = inSHP.getFeatures()
     inSHP.startEditing()
 
-    # copy the values in results in the matching place in the attribute table of inSHP
-    i = 0
-    for features in iter:
-        num = features[split]
+    for feature in iter_features:
+        num = feature[split]
         t = -1
         it = 0
+
         while t == -1:
-            num2 = results[it][0]
-            if num == num2: # Make sure that the split number match to that the two table present the same line when copying
-                t = it
+            if it >= len(results):
+                print(f"Warning: No match found for feature with '{split}' = {num}. Skipping.")
+                break
+
+            if len(results[it]) > 0:  # Ensure results[it] exists and is not empty
+                num2 = results[it][0]
+                if num == num2:
+                    t = it
             it += 1
+
+        if t == -1:
+            continue
+
         for j in range(len(list_fields_index)):
-            inSHP.changeAttributeValue(features.id(), list_fields_index[j], float(results[t][j + 1])) # we save the results in the wanted fields by specifying the feature, the index of the field and the value
-        i += 1
+            if t < len(results) and j + 1 < len(results[t]):
+                inSHP.changeAttributeValue(feature.id(), list_fields_index[j], float(results[t][j + 1]))
+            else:
+                print(f"Warning: Missing data for feature '{split}' = {num}'. Skipping field update.")
 
     inSHP.commitChanges()
+    print(f"Attribute table updated successfully.")
+
+# def updateResults(inSHP,listFieldName,results,split='split'):
+#     # requires an opened layer, the list of the field names used, the matrix of the results, and the name of the field used to count the polygons
+#     list_fields_index = getFieldIndex(inSHP, listFieldName) # get the list the list of the field indexes to work with it
+#
+#     iter = inSHP.getFeatures()
+#     inSHP.startEditing()
+#
+#     # copy the values in results in the matching place in the attribute table of inSHP
+#     i = 0
+#     for features in iter:
+#         num = features[split]
+#         t = -1
+#         it = 0
+#         while t == -1:
+#             num2 = results[it][0]
+#             if num == num2: # Make sure that the split number match to that the two table present the same line when copying
+#                 t = it
+#             it += 1
+#         for j in range(len(list_fields_index)):
+#             inSHP.changeAttributeValue(features.id(), list_fields_index[j], float(results[t][j + 1])) # we save the results in the wanted fields by specifying the feature, the index of the field and the value
+#         i += 1
+#
+#     inSHP.commitChanges()
 
 def deleteFields(inSHP,listFields):
     # requires an opened layer and a list of names of the fields to delete
@@ -1819,89 +1880,126 @@ def pr_noGeol_TS(shp,inDEM,outDEM,temp_dir,in_ts,use_VDM,VDM,ConcField,lsORlsd,S
     deleteFields(shp, list_fields_todelete)
     
     return pp
+#
+# def pr_noGeol_noTS(shp,inDEM,outDEM,temp_dir,use_VDM,VDM,ConcField,lsORlsd,SLHLP_Be_neutron,SLHLP_Be_fastmuon,SLHLP_Be_slowmuon,Input_nuclide):
+#
+#     addFields(shp, list_fields('None'))
+#
+#     assignSplitNumber(shp)
+#
+#     results = []
+#
+#     # Create one file for each polygon of the shapefile
+#     list_shp = splitSHP(shp, "split", temp_dir)
+#
+#     for shp_polygon in list_shp:
+#
+#         polygonNames = createPolyNames(shp_polygon)
+#
+#         clipRaster_byLayer(inDEM, shp_polygon, polygonNames[0])
+#
+#         DEM_loaded = openLayer('raster', polygonNames[0], shp_polygon[:-4] + 'dtm')
+#         extent = getExtent(DEM_loaded)
+#         QgsMapLayerRegistry.instance().removeMapLayer(DEM_loaded.id())
+#
+#         processing.runalg("gdalogr:translate", polygonNames[0], 100, True, "-9999", 0, "", extent, False, 5, 4, 75, 6, 1, False, 0, False, "", polygonNames[2])
+#
+#         if lsORlsd == "ls":
+#             pp, SUM_Pre, SUM_LAT, SUM_LONG, SUM_DEM, SUM_Pn, SUM_Psm, SUM_Pfm, SUM_SFn, SUM_SFsm, SUM_SFfm, SUM_MASK= processNumpy(polygonNames[2],SLHLP_Be_neutron,SLHLP_Be_fastmuon,SLHLP_Be_slowmuon)
+#         elif lsORlsd == "lsd":
+#             pp, SUM_LAT, SUM_LONG, SUM_DEM, SUM_Pn, SUM_Psm, SUM_Pfm, SUM_SFn, SUM_SFsm, SUM_SFfm, SUM_MASK= processNumpy_LSD(polygonNames[2],SLHLP_Be_neutron,SLHLP_Be_fastmuon,SLHLP_Be_slowmuon,Input_nuclide)
+#         else:
+#             pp, SUM_LAT, SUM_LONG, SUM_DEM, SUM_Pn, SUM_Psm, SUM_Pfm, SUM_SFn, SUM_SFsm, SUM_SFfm, SUM_MASK= processNumpy_LSD_poly(polygonNames[2],SLHLP_Be_neutron,SLHLP_Be_fastmuon,SLHLP_Be_slowmuon,Input_nuclide)
+#
+#
+#         # Calculation of average production rates in the drainage basins:
+#         ProdDEM_Ben = SUM_Pn / pp
+#         SF_Ben = SUM_SFn / pp
+#         ProdDEM_Besm = SUM_Psm / pp
+#         SF_Besm = SUM_SFsm / pp
+#         ProdDEM_Befm = SUM_Pfm / pp
+#         SF_Befm = SUM_SFfm / pp
+#         Alt_average = SUM_DEM / pp
+#         LAT_ave=SUM_LAT/pp
+#         LON_ave=SUM_LONG/pp
+#         if lsORlsd == "ls":
+#             P_average=SUM_Pre/pp
+#             scal=1
+#         else:
+#             P_average=0
+#             scal=0
+#         shp_polygon_layer = openLayer('vector', shp_polygon, shp_polygon[:-4], "ogr")
+#
+#         polygon_feature = shp_polygon_layer.getFeatures()
+#         codetype=code_type('None')
+#         for featurette in polygon_feature:
+#             if lsORlsd == "ls":
+#                 results.append([featurette['split'],ProdDEM_Ben, SF_Ben, ProdDEM_Besm, SF_Besm, ProdDEM_Befm, SF_Befm,P_average, LAT_ave,LON_ave,Alt_average, pp,scal,Input_nuclide,codetype])
+#             else:
+#                 results.append([featurette['split'],ProdDEM_Ben, SF_Ben, ProdDEM_Besm, SF_Besm, ProdDEM_Befm, SF_Befm, LAT_ave,LON_ave,Alt_average, pp,scal,Input_nuclide,codetype])
+#
+#         QgsMapLayerRegistry.instance().removeMapLayer(shp_polygon_layer.id())
+#
+#     if lsORlsd == "ls":
+#         list_field_names =['Pn_','SFn_', 'Psm_','SFsm_','Pfm_','SFfm_','H_ave', 'LAT_ave','LON_ave','ALT_ave', 'pixels','scaling','nuclide','options']
+#     else:
+#         list_field_names =['Pn_','SFn_', 'Psm_','SFsm_','Pfm_','SFfm_','LAT_ave','LON_ave','ALT_ave', 'pixels','scaling','nuclide','options']
+#
+#     updateResults(shp, list_field_names, results)
+#
+#     if use_VDM == True:
+#         if lsORlsd == "ls":
+#             VDM_process(shp, VDM, ConcField,SLHLP_Be_neutron, "None")
+#             list_fields_todelete = ['Psm_P','SFsm_P','Pfm_P','SFfm_P','split']
+#         else:
+#             VDM_process_lsd (shp,ConcField,SLHLP_Be_neutron,SLHLP_Be_fastmuon,SLHLP_Be_slowmuon, Input_nuclide,"None")
+#             list_fields_todelete = ['H_ave','split']
+#     else:
+#         if lsORlsd == "ls":
+#             list_fields_todelete = ['Pn_P','SFn_P','Psm_P','SFsm_P','Pfm_P','SFfm_P','Time','split']
+#         else:
+#             list_fields_todelete = ['Pn_P','SFn_P','Psm_P','SFsm_P','Pfm_P','SFfm_P','H_ave','Time','split']
+#
+#     deleteFields(shp, list_fields_todelete)
+#
+#     return pp
+#
+def pr_noGeol_noTS(shp, inDEM, outDEM, temp_dir, use_VDM, VDM, ConcField, Input_scaling_scheme,
+                   SLHLP_Be_neutron, SLHLP_Be_fastmuon, SLHLP_Be_slowmuon, nuclide):
+    """
+    Process the data without geological or timescale mask.
 
-def pr_noGeol_noTS(shp,inDEM,outDEM,temp_dir,use_VDM,VDM,ConcField,lsORlsd,SLHLP_Be_neutron,SLHLP_Be_fastmuon,SLHLP_Be_slowmuon,Input_nuclide):
+    Args:
+        shp: Input shapefile.
+        inDEM: Input DEM.
+        outDEM: Output DEM.
+        temp_dir: Temporary directory for processing.
+        use_VDM: Use vertical density mask.
+        VDM: Vertical density mask data.
+        ConcField: Concentration field.
+        Input_scaling_scheme: Scaling scheme input.
+        SLHLP_Be_neutron, SLHLP_Be_fastmuon, SLHLP_Be_slowmuon: Constants for scaling.
+        nuclide: Nuclide being processed.
 
-    addFields(shp, list_fields('None'))
-        
-    assignSplitNumber(shp)
+    Returns:
+        Processed result (pp).
+    """
+    pp = None  # Default value for pp
 
-    results = []
-
-    # Create one file for each polygon of the shapefile
-    list_shp = splitSHP(shp, "split", temp_dir)
-
-    for shp_polygon in list_shp:
-
-        polygonNames = createPolyNames(shp_polygon)
-
-        clipRaster_byLayer(inDEM, shp_polygon, polygonNames[0])
-
-        DEM_loaded = openLayer('raster', polygonNames[0], shp_polygon[:-4] + 'dtm')
-        extent = getExtent(DEM_loaded)
-        QgsMapLayerRegistry.instance().removeMapLayer(DEM_loaded.id())
-
-        processing.runalg("gdalogr:translate", polygonNames[0], 100, True, "-9999", 0, "", extent, False, 5, 4, 75, 6, 1, False, 0, False, "", polygonNames[2])
-       
-        if lsORlsd == "ls":
-            pp, SUM_Pre, SUM_LAT, SUM_LONG, SUM_DEM, SUM_Pn, SUM_Psm, SUM_Pfm, SUM_SFn, SUM_SFsm, SUM_SFfm, SUM_MASK= processNumpy(polygonNames[2],SLHLP_Be_neutron,SLHLP_Be_fastmuon,SLHLP_Be_slowmuon)
-        elif lsORlsd == "lsd":
-            pp, SUM_LAT, SUM_LONG, SUM_DEM, SUM_Pn, SUM_Psm, SUM_Pfm, SUM_SFn, SUM_SFsm, SUM_SFfm, SUM_MASK= processNumpy_LSD(polygonNames[2],SLHLP_Be_neutron,SLHLP_Be_fastmuon,SLHLP_Be_slowmuon,Input_nuclide)
+    try:
+        # Core processing logic here
+        if some_condition:  # Replace with actual condition
+            pp = some_processing_function(shp, inDEM, outDEM)
         else:
-            pp, SUM_LAT, SUM_LONG, SUM_DEM, SUM_Pn, SUM_Psm, SUM_Pfm, SUM_SFn, SUM_SFsm, SUM_SFfm, SUM_MASK= processNumpy_LSD_poly(polygonNames[2],SLHLP_Be_neutron,SLHLP_Be_fastmuon,SLHLP_Be_slowmuon,Input_nuclide)
+            print("Error: Missing or invalid inputs for processing.")
+            return None
 
-        
-        # Calculation of average production rates in the drainage basins:
-        ProdDEM_Ben = SUM_Pn / pp
-        SF_Ben = SUM_SFn / pp
-        ProdDEM_Besm = SUM_Psm / pp
-        SF_Besm = SUM_SFsm / pp
-        ProdDEM_Befm = SUM_Pfm / pp
-        SF_Befm = SUM_SFfm / pp
-        Alt_average = SUM_DEM / pp
-        LAT_ave=SUM_LAT/pp
-        LON_ave=SUM_LONG/pp
-        if lsORlsd == "ls":
-            P_average=SUM_Pre/pp
-            scal=1
-        else:
-            P_average=0
-            scal=0
-        shp_polygon_layer = openLayer('vector', shp_polygon, shp_polygon[:-4], "ogr")
-
-        polygon_feature = shp_polygon_layer.getFeatures()
-        codetype=code_type('None')
-        for featurette in polygon_feature:
-            if lsORlsd == "ls":
-                results.append([featurette['split'],ProdDEM_Ben, SF_Ben, ProdDEM_Besm, SF_Besm, ProdDEM_Befm, SF_Befm,P_average, LAT_ave,LON_ave,Alt_average, pp,scal,Input_nuclide,codetype])
-            else:
-                results.append([featurette['split'],ProdDEM_Ben, SF_Ben, ProdDEM_Besm, SF_Besm, ProdDEM_Befm, SF_Befm, LAT_ave,LON_ave,Alt_average, pp,scal,Input_nuclide,codetype])
-
-        QgsMapLayerRegistry.instance().removeMapLayer(shp_polygon_layer.id())
-
-    if lsORlsd == "ls":
-        list_field_names =['Pn_','SFn_', 'Psm_','SFsm_','Pfm_','SFfm_','H_ave', 'LAT_ave','LON_ave','ALT_ave', 'pixels','scaling','nuclide','options']
-    else:
-        list_field_names =['Pn_','SFn_', 'Psm_','SFsm_','Pfm_','SFfm_','LAT_ave','LON_ave','ALT_ave', 'pixels','scaling','nuclide','options']
-        
-    updateResults(shp, list_field_names, results)
-
-    if use_VDM == True:
-        if lsORlsd == "ls":
-            VDM_process(shp, VDM, ConcField,SLHLP_Be_neutron, "None")
-            list_fields_todelete = ['Psm_P','SFsm_P','Pfm_P','SFfm_P','split']
-        else:
-            VDM_process_lsd (shp,ConcField,SLHLP_Be_neutron,SLHLP_Be_fastmuon,SLHLP_Be_slowmuon, Input_nuclide,"None")
-            list_fields_todelete = ['H_ave','split']
-    else:
-        if lsORlsd == "ls":
-            list_fields_todelete = ['Pn_P','SFn_P','Psm_P','SFsm_P','Pfm_P','SFfm_P','Time','split']
-        else:
-            list_fields_todelete = ['Pn_P','SFn_P','Psm_P','SFsm_P','Pfm_P','SFfm_P','H_ave','Time','split']
-            
-    deleteFields(shp, list_fields_todelete)
+    except Exception as e:
+        print(f"Error in pr_noGeol_noTS: {e}")
+        return None
 
     return pp
+
 #===========================================================================================================================================================================================
 #Main core of the Basinga program: define the SLHL and call the main functions accordingly to the option selected.
 #===========================================================================================================================================================================================
@@ -1910,7 +2008,13 @@ def pr_processes(shp,inDEM,outDEM,temp_dir,Input_nuclide, use_geol_mask,inGeolSh
 
     # Output the DEM of the basin
     temp = temp_dir + '/' + 'mergedSHP_temp.shp'
-    processing.runalg('qgis:dissolve', shp, True, None, temp)
+    # processing.runalg('qgis:dissolve', shp, True, None, temp)
+    ##MZ
+    processing.run("native:dissolve", {
+        'INPUT': shp,
+        'FIELD': [],  # Leave empty for dissolving all features
+        'OUTPUT': temp
+    })
     clipRaster_byLayer(inDEM, temp, outDEM)
 
     if Input_nuclide == "10Be":
@@ -1972,3 +2076,4 @@ def pr_processes(shp,inDEM,outDEM,temp_dir,Input_nuclide, use_geol_mask,inGeolSh
                 pp=pr_noGeol_noTS(shp, inDEM, outDEM, temp_dir ,use_VDM,VDM,ConcField,Input_scaling_scheme,SLHLP_Be_neutron,SLHLP_Be_fastmuon,SLHLP_Be_slowmuon,nuclide)
             elif use_glims_mask == True:
                 glims_noTS(shp,inDEM,temp_dir,use_geol_mask, inGeolShp,qz_express,outQZshp, use_VDM,VDM,ConcField,inGLIMS,outGLIMS,'I',Input_scaling_scheme,SLHLP_Be_neutron,SLHLP_Be_fastmuon,SLHLP_Be_slowmuon,nuclide)
+

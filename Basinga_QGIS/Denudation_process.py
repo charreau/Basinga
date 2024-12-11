@@ -8,8 +8,8 @@ import math
 from math import sqrt
 
 # Import cosmogenic parameters and the addfield function
-from parameters_definition import *
-from  PR_processes import addFields
+from .parameters_definition import *
+from  .PR_processes import addFields
 
 #Uncertainties on the 10Be cosmogenic production rates:
 #U_spal=0.09 #Balco et al. (2008) - we used instead the uncertianties given in Table 7 of Martin et al. (2017) cf function "nuclideslected" below
