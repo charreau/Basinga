@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BasingaDialogBase</class>
+ <widget class="QDialog" name="BasingaDialogBase">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>780</width>
+    <height>832</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>780</width>
+    <height>832</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>780</width>
+    <height>832</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Basinga</string>
+  </property>
+  <widget class="QTextBrowser" name="textBrowser">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>1</y>
+     <width>771</width>
+     <height>831</height>
+    </rect>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#ffffff&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:5px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:14pt; font-weight:600; color:#000000;&quot;&gt;Basinga&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:12pt; font-weight:600; color:#00709c;&quot;&gt;Tab : &lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:12pt; font-weight:600; color:#000000;&quot;&gt;Production rates&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:10pt; font-weight:600; color:#00709c;&quot;&gt;Summary&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:600; color:#000020;&quot;&gt;This tool computes the basin average scaling factors and  cosmogenic production rates for different nuclides (3He,21Ne and 10Be). It requires at least a polygon shape file of the drainage basins and a D.E.M of the studied area. The calculations follow either the scaling scheme developed by Stone (2000) slightly modified to include slow and fast muon production (Braucher et al., 2011) or the LSD model developped by Lifton et al. (2014).The tool also provides four corrective options that account for (1) quartz zone locations, (2) topographic shielding factor, (3) ice cover shielding factor and (4) paleomagnetic changes. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:10pt; font-weight:600; color:#00709c;&quot;&gt;Syntax&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:12pt; font-weight:496; color:#000020;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;table border=&quot;0&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;&quot; width=&quot;100%&quot; cellspacing=&quot;2&quot; cellpadding=&quot;5&quot;&gt;
+&lt;tr&gt;
+&lt;td width=&quot;30%&quot; bgcolor=&quot;#dddddd&quot; style=&quot; vertical-align:bottom;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:600; color:#000020;&quot;&gt;Parameter &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td width=&quot;50%&quot; bgcolor=&quot;#dddddd&quot; style=&quot; vertical-align:bottom;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:600; color:#000020;&quot;&gt;Explanation &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td width=&quot;20%&quot; bgcolor=&quot;#dddddd&quot; style=&quot; vertical-align:bottom;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:600; color:#000020;&quot;&gt;Data Type &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Input shape file of the drainage basins&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Input the vector layer of the drainage basins. Polygon shape files (.shp) are recommended.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Vector layer&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Input DEM raster&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Input a D.E.M raster layer of the studied area. GeoTiff files are recommended (.tif). &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Raster layer&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Nuclide&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Selected nuclide for teh calculation, either 10Be, 3He or 21Ne &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Integer value: 10,3 or 21&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Output raster DEM of the drainage basins&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Output file name and path of the extracted watersheds as raster file (.tif).&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Raster file&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Scaling model&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Scaling model used for the calculation. Either Lal/Stone or LSD.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;String value: &amp;quot;ls&amp;quot; or &amp;quot;lsd&amp;quot;&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Geological mask&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Check the box if a correction for geology is wanted.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Boolean&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Input geol shape file&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Input the geological mask as a vector layer. It must include a field in the attribute table which specifies the nature of the lithology and/or mineralogy and that can be used in the sql selection. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Vector layer&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; background-color:#eeeeee;&quot;&gt;Select desired geology&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Specify an sql expression to select the appropriate polygones with the desired lithology and/or mineralogy. Use the expression window to write it.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Expression (&amp;quot;field&amp;quot; OPERATOR 'value')&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Output file&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Output the file name and path of the extracted watersheds excluding the area without the desired lithology/mineralogy. The output will be a polygon shape file including the results of the calculation in the attribute table.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Vector file&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Topographic mask&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Check the box if a correction for topographic shielding is wanted.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Boolean&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Input topo Mask raster&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Input the topographic mask as a raster layer.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Raster layer&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Glacial cover mask&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Check the box if a correction for glacial cover is wanted.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Boolean&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Input shape file&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Input the glacial cover as a vector layer.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Vector layer&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Ouput file &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Output file name and path of the extracted watersheds which will exclude the area covered by ice. The output will be a polygon shape file including the results of the calculation in the attribute table.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Vector file&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;VDM paleomagnetic correction&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Check the box if a correction for paleomagnetic changes is wanted.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Boolean&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Concentration Field&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Select the field which provides the nuclide concentration values. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Field&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;p style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:12pt; font-weight:600; color:#00709c;&quot;&gt;Tab : &lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:12pt; font-weight:600; color:#000000;&quot;&gt;Denudation&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:10pt; font-weight:600; color:#00709c;&quot;&gt;Summary&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:600; color:#000020; background-color:#ffffff;&quot;&gt;This tool computes the basin average denudation rates based on the basin average production rate. The &lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:600; font-style:italic; color:#000020; background-color:#ffffff;&quot;&gt;Production rate&lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:600; color:#000020; background-color:#ffffff;&quot;&gt;s tool must have been ran first to provide the cosmogenic production rates needed for the calculation.&lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; color:#000020;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:10pt; font-weight:600; color:#00709c;&quot;&gt;Syntax&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:12pt; font-weight:496; color:#000020;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;table border=&quot;0&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;&quot; width=&quot;100%&quot; cellspacing=&quot;2&quot; cellpadding=&quot;5&quot;&gt;
+&lt;tr&gt;
+&lt;td width=&quot;30%&quot; bgcolor=&quot;#dddddd&quot; style=&quot; vertical-align:bottom;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:600; color:#000020;&quot;&gt;Parameter &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td width=&quot;50%&quot; bgcolor=&quot;#dddddd&quot; style=&quot; vertical-align:bottom;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:600; color:#000020;&quot;&gt;Explanation &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td width=&quot;20%&quot; bgcolor=&quot;#dddddd&quot; style=&quot; vertical-align:bottom;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:600; color:#000020;&quot;&gt;Data Type &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Input shape file &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Depending on the corrective options applied while running &lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:496; font-style:italic; color:#000000;&quot;&gt;the Production rates&lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt; tool, the user needs to input:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#eeeeee;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;- the original watershed polygons shape file (if no corrective option, or just the topographic shielding and/or the paleomagnetic corrections)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#eeeeee;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;- the output quartz polygons shape file (in any cases if the correcttion for geology has been selected but NOT the correction for ice cover)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#eeeeee;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;- the output polygons shape file generated if the correction for ice cover was selected&lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Vector layer&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Density&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;Input the a&lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;verage soil density in the studied watershed&lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Value (float)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Concentration field&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Select the field where the nuclide concentration are given&lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Field&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Concentration uncertainty field&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Select the field where the nuclide concentration uncertainties are given&lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Field&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;If paleomagnetic correction previously applied&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;C&lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;heck the boxe if a correction for paleomagnetism was done during the calculation of the  cosmogenic production rates&lt;/span&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000; background-color:#eeeeee;&quot;&gt;Boolean&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Verdana,Gill,Helvetica,Sans-serif'; font-size:8pt; font-weight:496; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;table border=&quot;0&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;&quot; cellspacing=&quot;2&quot; cellpadding=&quot;0&quot;&gt;
+&lt;tr&gt;
+&lt;td bgcolor=&quot;#eeeeee&quot; style=&quot; vertical-align:top;&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
