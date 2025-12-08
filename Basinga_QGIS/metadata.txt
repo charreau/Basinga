@@ -9,7 +9,7 @@
 [general]
 name=Basinga
 qgisMinimumVersion=2.8
-qgisMaximumVersion=3.34.12
+qgisMaximumVersion=3.99
 description=Caculate 10Be production rates and erosion
 version=1.0
 author=CRPG - Nancy France
